@@ -87,40 +87,42 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
   return (
     <div
       onClick={onSelect}
-      className={`relative group rounded-3xl p-6 transition-all duration-300 select-none overflow-hidden border ${
+      className={`relative group rounded-3xl p-5 sm:p-6 transition-all duration-300 select-none overflow-hidden border ${
         theme.bg
       } ${theme.border} ${
-        isSelected ? 'ring-2 ring-[#9FE870] ring-offset-2 scale-[1.01]' : 'hover:-translate-y-1'
-      } cursor-pointer flex flex-col justify-between min-h-[220px] aspect-[1.586/1]`}
+        isSelected
+          ? 'ring-2 ring-[#00DF81] ring-offset-2 ring-offset-[#0E1B15] shadow-[0_0_25px_rgba(0,223,129,0.22)] scale-[1.01]'
+          : 'hover:-translate-y-1'
+      } cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[220px] aspect-[1.586/1]`}
     >
       {/* Subtle glossy card overlay sheen */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.03] to-white/[0.12] pointer-events-none rounded-3xl" />
       <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-white/[0.04] blur-2xl pointer-events-none" />
 
       {/* Top Header: Provider & Contactless */}
-      <div className="relative z-10 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-base font-bold tracking-tight text-white font-sans">
+      <div className="relative z-10 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-sm sm:text-base font-bold tracking-tight text-white font-sans truncate">
             {card.cardName}
           </span>
           <span
-            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${theme.badge}`}
+            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border shrink-0 ${theme.badge}`}
           >
             {card.provider}
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Wifi className="w-5 h-5 text-white/70 rotate-90" />
+        <div className="flex items-center gap-2 shrink-0">
+          <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 rotate-90" />
         </div>
       </div>
 
       {/* Middle: EMV Chip & Masked Number */}
-      <div className="relative z-10 my-auto pt-2">
-        <div className="flex items-center gap-3 mb-3">
+      <div className="relative z-10 my-auto pt-1 sm:pt-2">
+        <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
           {/* Metallic Gold Chip */}
           <div
-            className={`w-11 h-8 rounded-lg border flex items-center justify-center p-1 relative overflow-hidden shadow-sm ${theme.chip}`}
+            className={`w-10 h-7 sm:w-11 sm:h-8 rounded-lg border flex items-center justify-center p-1 relative overflow-hidden shadow-sm shrink-0 ${theme.chip}`}
           >
             <div className="w-full h-full border border-black/20 rounded flex flex-col justify-between p-0.5 opacity-80">
               <div className="h-0.5 bg-black/20 rounded-full" />
@@ -128,10 +130,10 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
               <div className="h-0.5 bg-black/20 rounded-full" />
             </div>
           </div>
-          <span className="text-xs text-white/60 font-mono tracking-wider">CREDIT</span>
+          <span className="text-[10px] sm:text-xs text-white/60 font-mono tracking-wider">CREDIT</span>
         </div>
 
-        <div className="flex items-center gap-3 font-mono text-lg tracking-[0.25em] text-white/90">
+        <div className="flex items-center gap-2 sm:gap-3 font-mono text-base sm:text-lg tracking-[0.18em] sm:tracking-[0.22em] text-white/90">
           <span>••••</span>
           <span>••••</span>
           <span>••••</span>
@@ -140,30 +142,30 @@ export const CreditCardVisual: React.FC<CreditCardVisualProps> = ({
       </div>
 
       {/* Bottom: Cardholder, Expiry & Utilization Indicator */}
-      <div className="relative z-10 pt-2 border-t border-white/10 flex items-end justify-between">
-        <div>
+      <div className="relative z-10 pt-2 border-t border-white/10 flex items-end justify-between gap-2">
+        <div className="min-w-0">
           <div className="text-[9px] uppercase tracking-wider text-white/50 font-medium">
             Cardholder
           </div>
-          <div className="text-xs font-semibold text-white tracking-wide truncate max-w-[130px]">
+          <div className="text-[11px] sm:text-xs font-semibold text-white tracking-wide truncate max-w-[110px] sm:max-w-[140px]">
             {card.cardHolder || 'CARDMEMBER'}
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center shrink-0">
           <div className="text-[9px] uppercase tracking-wider text-white/50 font-medium">
             Expires
           </div>
-          <div className="text-xs font-mono font-medium text-white/90">
+          <div className="text-[11px] sm:text-xs font-mono font-medium text-white/90">
             {card.expiryMonth || '12'}/{card.expiryYear || '28'}
           </div>
         </div>
 
-        <div className="text-right">
+        <div className="text-right shrink-0">
           <div className="text-[9px] uppercase tracking-wider text-white/50 font-medium">
             Avail. Limit
           </div>
-          <div className="text-xs font-bold text-white tracking-tight">
+          <div className="text-[11px] sm:text-xs font-bold text-white tracking-tight">
             ${available.toLocaleString()}
           </div>
         </div>
